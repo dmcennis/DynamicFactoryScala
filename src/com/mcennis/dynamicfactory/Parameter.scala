@@ -3,7 +3,9 @@ package com.mcennis.dynamicfactory
 import scala.reflect.runtime.universe._
 
 
-abstract class Parameter[T](var key : String, var data : List[T])(implicit tag : TypeTag[T]) extends Ordered[Parameter[T]]{
+abstract class Parameter[T](var k : String, var d : List[T])(implicit tag : TypeTag[T]) extends Ordered[Parameter[T]]{
+  var data : List[T] = data;
+  var key : String = key;
   val classType : TypeTag[T]=tag;
   var shortDescription : String = "Tooltip content goes here";
   var longDescription : String = "Something suitable for a dialog box";

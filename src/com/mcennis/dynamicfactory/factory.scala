@@ -3,55 +3,51 @@ package com.mcennis.dynamicfactory
 import scala.collection.mutable.HashMap
 
 trait factory[Type] {
-    def  map:HashMap[String,Type with factory[Type]] = new HashMap[String,T with factory[Type]];
+    def  map:HashMap[String,factory[Type]] = new HashMap[String,factory[Type]];
     def properties:PropertiesInternal  = new PropertiesImplementation();
     
-    def create[Type]( props:Properties) : Type = {
+    def create[T]( props:Properties) : T = {
         if((props != null)&&(props.quickCheck("ClassName"))){
             props.quickGet("ClassName") match {
               case name : String => 
-                return map.get(name).getOrElse(return this.create).prototype(props)
+                return map.get(name).getOrElse(
+                    return this.map.get("Default").getOrElse(
+                        throw new Exception("INTERNAL SYSTEM: No constructors found for this object - including defaults")).create[T](props)).create[T](props)
+              case _ => return this.map.get("Default").getOrElse(
+                        throw new Exception("INTERNAL SYSTEM: No constructors found for this object - including defaults")).create[T](props)
             }
 
             
-            if(map.contains(props.quickGet("ClassName"))) {
-                return map.get(props.quickGet("ClassName")).prototype(props);
-            }else{
-                Logger.getLogger(this.getClass().getName()).log(Level.WARNING,String.format("Class %s is unknown. Using the default instead", props.quickGet("ClassName")));
-                properties.getQuick("Default") match{
-                  case name: String =>  return map.get(name).get.prototype(props);
-                }
-                return map.get(name).prototype(props);
+//            Logger.getLogger(this.getClass().getName()).log(Level.WARNING,String.format("Class %s is unknown. Using the default instead", props.quickGet("ClassName")));
+            properties.getQuick("Default") match{
+               case name: String =>  return map.get(name).get.prototype(props).create(props);
             }
+//            Logger.getLogger(this.getClass().getName()).log(Level.WARNING,"Class parameter is missing. Using the default instead");
         }
-            Logger.getLogger(this.getClass().getName()).log(Level.WARNING,"Class parameter is missing. Using the default instead");
-            val name:String = (String)properties.getQuick("Default");
-            return map.get(name).get.prototype(props);
+            properties.getQuick("Default") match{
+              case name:String => return map.get(name).get.prototype(props).create(properties);
+              case _ => throw new Exception("INTERNAL SYSTEM: No constructors found for this object - including defaults");
+            }
         
     }
 
-    def create[Type]:Type = {
-        return create(properties);
+    def create[T]:T = {
+        return create[T](properties);
     }
 
-    def create[Type](name:String):Type = {
-        var p: Properties = properties.prototype()
-        p match {
-          case props: PropertiesInternal => create[Type](name,props.mergeDefaults(properties))
-        }
-        return create[Type](name,properties);
-    }
+    def create[T](name:String):T = return create[T](name,properties)
+    
 
-    def create[Type](name:String, props:PropertiesInternal ):Type = {
-        try {
+    def create[T](name:String, props:PropertiesInternal ):T = {
+//        try {
             props.add("FactoryName",name);
-        } catch (InvalidObjectTypeException e) {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE,"DEVELOPER(this.getClass().getName()): FactoryName property passed to this Factory should not have a property 'FactoryName' of type other than string");
-        }
-        return create(props);
+//        } catch (InvalidObjectTypeException e) {
+//            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE,"DEVELOPER(this.getClass().getName()): FactoryName property passed to this Factory should not have a property 'FactoryName' of type other than string");
+//        }
+        return create[T](props);
     }
 
-    def prototype():factory[Type] ;
+    def prototype():factory[Type]  = this
 
     def prototype(props:Properties ) : factory[Type] = {
         return prototype();
@@ -75,10 +71,10 @@ trait factory[Type] {
     
     def addType(t:String,proto:factory[Type]): factory[Type] = {
         if(t == null){
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "Null org.dynamicfactory.property class name added");
+//            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "Null org.dynamicfactory.property class name added");
         }   
         if(proto == null){
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "No org.dynamicfactory.property obejct provided");
+//            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "No org.dynamicfactory.property obejct provided");
         }
         
         map.put(t,proto);

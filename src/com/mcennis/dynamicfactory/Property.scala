@@ -8,6 +8,5 @@ abstract class Property[T] (var key:String, var data : List[T])(implicit tag : T
   def add(item : T):Property[T];
 }
 
-object Property{
-  ;
+object Property {
 }

@@ -23,6 +23,6 @@ abstract class Properties {
     def quickCheck[Value](S : String)(implicit tag : TypeTag[Value])  : Boolean;
 }
 
-object Properties extends factory[PropertiesInternal]{
+object Properties extends factory[Properties]{
   def create : Properties = PropertiesImplementation.create
 }

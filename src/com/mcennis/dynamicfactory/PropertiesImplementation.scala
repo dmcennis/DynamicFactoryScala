@@ -3,6 +3,7 @@ package com.mcennis.dynamicfactory
 class PropertiesImplementation extends PropertiesInternal{
 
   var map : Map[String,Parameter[AnyRef]] = Map[String,ParameterInternal[AnyRef]]()
+  var restrictions : SyntaxChecker[AnyRef] = PropertyRestriction.create[AnyRef];
   
   def check(props: com.mcennis.dynamicfactory.Properties): Boolean = {
     for( prop <- props.get()){
@@ -62,6 +63,30 @@ class PropertiesImplementation extends PropertiesInternal{
   def set(value: Parameter[AnyRef]): PropertiesInternal = {
       map = map + (value.key -> Parameter.create[AnyRef](value));
       return this;
+  }
+  
+      def add(t:String,value:AnyRef*) : PropertiesInternal = add(t,Parameter.create[AnyRef](t,value))
+      def add(t:String,value:Property[AnyRef]) : PropertiesInternal = add(t,Parameter.create[AnyRef](t,value))
+      def add(t:String,value:List[AnyRef]) : PropertiesInternal = add(t,Parameter.create(t,value))
+      def add(t:String,value:Parameter[AnyRef]) : PropertiesInternal = {
+        if((t!=null) && (value!=null)){
+          map.get(t).get.data = map.get(t).get.data ::: value.data;
+        }
+        this
+      }
+      
+  def getDefaultRestriction(): com.mcennis.dynamicfactory.SyntaxChecker[AnyRef] = restrictions
+  def quickCheck[Value](s: String)(implicit tag: reflect.runtime.universe.TypeTag[Value]): Boolean = {
+    if(s!=null){
+      if(map.contains(s)){
+        if(map.get(s).get.classType==tag){
+          if(!map.get(s).get.data.isEmpty){
+            return true;
+          }
+        }
+      }
+    }
+    false
   }
   
 }
