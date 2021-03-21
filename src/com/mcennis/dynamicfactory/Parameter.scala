@@ -9,13 +9,8 @@ abstract class Parameter[T](var key : String, var data : List[T])(implicit tag :
   var longDescription : String = "Something suitable for a dialog box";
   var description : String = "Larger document for the extended help topic (a complete web page?)";
   var rule : SyntaxChecker[T] = SyntaxChecker.create[T];
-  def add(value : T) : Parameter[T];
-  def add(value : List[T]) : Parameter[T];  
-  def set(prop: Property[T]) : Parameter[T];
-  def set(value : T):Parameter[T];
-  def set(value : List[T]):Parameter[T];
-  def clear():Parameter[T];
   def prototype[T](key:String, data : List[T])(implicit tag : TypeTag[T]):Parameter[T];
+  
 }
 
 

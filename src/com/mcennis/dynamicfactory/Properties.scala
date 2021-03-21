@@ -1,5 +1,7 @@
 package com.mcennis.dynamicfactory
 
+import scala.reflect.runtime.universe._
+
 abstract class Properties {
     var map : Map[String,Parameter[AnyRef]]
     def prototype() : Properties;
@@ -8,23 +10,19 @@ abstract class Properties {
 
     def get(s : String) : Parameter[AnyRef] ;
 
-//    def getDefaultRestriction() : SyntaxChecker ;
+    def getDefaultRestriction() : SyntaxChecker[AnyRef] ;
 
     def check(t : Parameter[AnyRef]) : Boolean ;
     
     def check(props : Properties): Boolean;
 
-    def merge(props : Properties) : PropertiesInternal;
+    def getQuick(s : String) : AnyRef;
     
-    def mergeDefaults(props : Properties) : PropertiesInternal;
+    def quickGet(s : String) : AnyRef = getQuick(s);
     
-    def getQuick(s : String) : Parameter[AnyRef];
-    
-    def quickGet(s : String) : Parameter[AnyRef] = getQuick(s);
-    
-    
+    def quickCheck[Value](S : String)(implicit tag : TypeTag[Value])  : Boolean;
 }
 
-object Properties {
+object Properties extends factory[PropertiesInternal]{
   def create : Properties = PropertiesImplementation.create
 }
