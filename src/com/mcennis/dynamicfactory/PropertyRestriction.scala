@@ -28,6 +28,6 @@ class PropertyRestriction[T](implicit tag : TypeTag[T]) extends SyntaxObject[T]{
 
 }
 
-object PropertyRestriction{
+object PropertyRestriction {//extends factory[PropertyRestriction[AnyRef]]{
   def create[T](implicit tag : TypeTag[T]) : PropertyRestriction[T] = new PropertyRestriction[T];
 }

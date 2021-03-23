@@ -11,7 +11,7 @@ class BasicProperty[T] (key:String, data : List[T])(implicit tag : TypeTag[T]) e
   def prototype[T](k:String, d : List[T])(implicit tag : TypeTag[T]):Property[T] = new BasicProperty[T](k,d);
 }
 
-object BasicProperty{
+object BasicProperty {//extends factory[BasicProperty[AnyRef]]{
   def create[T](implicit tag : TypeTag[T]):BasicProperty[T] = new BasicProperty[T]("",Nil)
   def create[T](key:String,data:List[T])(implicit tag : TypeTag[T]):BasicProperty[T] = new BasicProperty(key,data)
   def create[T](key:String,data:T*)(implicit tag : TypeTag[T]):BasicProperty[T] = new BasicProperty(key,data.toList)

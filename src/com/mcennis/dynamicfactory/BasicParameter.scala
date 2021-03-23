@@ -43,7 +43,8 @@ class BasicParameter[T] (key:String, data : List[T])(implicit tag : TypeTag[T])e
 }
 
 object BasicParameter {
-  def create[T](implicit tag : TypeTag[T]) : BasicParameter[T] = new BasicParameter[T]("",Nil);
+
+  def create[T](implicit tag : TypeTag[T]) : ParameterInternal[T] = new BasicParameter[T]("",Nil);
   def create[T](s: String, t : T* )(implicit tag : TypeTag[T]) : BasicParameter[T] = new BasicParameter[T](s,t.toList);
   def create[T](s: String, t : List[T] )(implicit tag : TypeTag[T]) : BasicParameter[T] = new BasicParameter[T](s,t);
   def create[T](param :Parameter[T])(implicit tag : TypeTag[T]) : BasicParameter[T] = BasicParameter.create[T](param.key,param.data);

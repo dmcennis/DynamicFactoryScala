@@ -12,7 +12,7 @@ abstract class ParameterInternal[T](key:String,data:List[T])(implicit tag:TypeTa
   
 }
 
-object ParameterInternal{
+object ParameterInternal {//extends factory[ParameterInternal[AnyRef]]{
   def create[T](implicit tag : TypeTag[T]) : ParameterInternal[T] = BasicParameter.create[T];
   def create[T](name : String, o : T*)(implicit tag : TypeTag[T]) : ParameterInternal[T] = BasicParameter.create[T](name,o.toList);
   def create[T](name:String,o:List[T])(implicit tag : TypeTag[T]) : ParameterInternal[T] = BasicParameter.create[T](name,o);

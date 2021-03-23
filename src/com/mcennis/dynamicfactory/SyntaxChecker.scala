@@ -15,6 +15,6 @@ abstract class SyntaxChecker[T] {
     def getClassType() : TypeTag[T];
 }
 
-object SyntaxChecker{
+object SyntaxChecker {//extends factory[SyntaxChecker[AnyRef]]{
   def create[T](implicit tag:TypeTag[T]) : SyntaxChecker[T] = PropertyRestriction.create[T]
 }

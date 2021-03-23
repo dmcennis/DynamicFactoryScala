@@ -12,7 +12,7 @@ abstract class SyntaxObject[T] extends SyntaxChecker[T]{
     def prototype[T](implicit tag:TypeTag[T]) : SyntaxObject[T]
 }
 
-object SyntaxObject{
+object SyntaxObject {// extends factory[SyntaxObject[AnyRef]]{
   def getDefaultRestriction[T](implicit tag : TypeTag[T]) : PropertyRestriction[T] = PropertyRestriction.create[T]
   def create[T](implicit tag : TypeTag[T]) : SyntaxObject[T] = PropertyRestriction.create[T]
 }
