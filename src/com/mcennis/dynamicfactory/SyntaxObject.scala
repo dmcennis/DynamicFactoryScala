@@ -2,7 +2,7 @@ package com.mcennis.dynamicfactory
 
 import scala.reflect.runtime.universe._
 
-abstract class SyntaxObject[T] extends SyntaxChecker[T]{
+abstract class SyntaxObject[+T] extends SyntaxChecker[T]{
     def setRestriction[T](key:String, restriction: PropertyRestriction[T])(implicit tag:TypeTag[T]) : SyntaxObject[T] 
     def setDefaultRestriction[T](restriction:PropertyRestriction[T])(implicit tag:TypeTag[T]) : SyntaxObject[T]    
     def setMinCount[T](minCount:Int)(implicit tag:TypeTag[T]) : SyntaxObject[T]   
