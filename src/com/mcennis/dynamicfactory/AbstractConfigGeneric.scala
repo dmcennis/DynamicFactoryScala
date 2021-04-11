@@ -5,66 +5,116 @@ import java.lang.reflect.Field
 import scala.reflect.runtime.universe._
 
 
-class AbstractConfigGeneric {//extends PropertiesImplementation{
-    var className:ParameterInternal[AbstractConfigGeneric] = new BasicParameter[AbstractConfigGeneric](
-        "ClassName", 
-        List(new AbstractConfigGeneric),
-        "The default class type created in this factory",
+abstract class AbstractConfigGeneric( //{//extends PropertiesImplementation{
+    val className:Parameter[String],
+    val shortDescription:Parameter[String],
+    val description:Parameter[String],
+    val longDescription:Parameter[String])
+  {
+  
+  def this(){
+    this(
+        new BasicParameter[String](
+        "String", 
+        List("Default"),
+        "The Location of the name of the class to instantiate",
         "When choosing between classes of a given interface, this variant is the default if no other is chosen",
         "As the master factory, this default object type is what is produced if there is no class in this factory matching the one provided, or if an object is created without specifying anything. The parameters needed to construct a reasonable deault of this type are programmed into the deault properties objet and mixed in with any supplied properties prior to construction. These properties are mutable and changeable.",
-        PropertyRestriction.create[AbstractConfigGeneric].setMinCount[AbstractConfigGeneric](1).setMaxCount[AbstractConfigGeneric](1)   );
-   
+        PropertyRestriction.create[String].setMinCount[String](1).setMaxCount[String](1)   ),
+  
+        new BasicParameter[String](
+        "ClassName", 
+        List("Default"),
+        "The Location of the name of the class to instantiate",
+        "When choosing between classes of a given interface, this variant is the default if no other is chosen",
+        "As the master factory, this default object type is what is produced if there is no class in this factory matching the one provided, or if an object is created without specifying anything. The parameters needed to construct a reasonable deault of this type are programmed into the deault properties objet and mixed in with any supplied properties prior to construction. These properties are mutable and changeable.",
+        PropertyRestriction.create[String].setMinCount[String](1).setMaxCount[String](1)   ),
+ 
+    new BasicParameter[String](
+        "ClassName", 
+        List("Default"),
+        "The Location of the name of the class to instantiate",
+        "When choosing between classes of a given interface, this variant is the default if no other is chosen",
+        "As the master factory, this default object type is what is produced if there is no class in this factory matching the one provided, or if an object is created without specifying anything. The parameters needed to construct a reasonable deault of this type are programmed into the deault properties objet and mixed in with any supplied properties prior to construction. These properties are mutable and changeable.",
+        PropertyRestriction.create[String].setMinCount[String](1).setMaxCount[String](1)   ),
+  
+    new BasicParameter[String](
+        "ClassName", 
+        List("Default"),
+        "The Location of the name of the class to instantiate",
+        "When choosing between classes of a given interface, this variant is the default if no other is chosen",
+        "As the master factory, this default object type is what is produced if there is no class in this factory matching the one provided, or if an object is created without specifying anything. The parameters needed to construct a reasonable deault of this type are programmed into the deault properties objet and mixed in with any supplied properties prior to construction. These properties are mutable and changeable.",
+        PropertyRestriction.create[String].setMinCount[String](1).setMaxCount[String](1))
+   )
+  }
+  
+    val rule:Parameter[SyntaxChecker[AnyRef]];
 
-    def this (copy : AbstractConfigGeneric){
-      this
-      className = copy.className
-    }
+    def getObject: AbstractConfigGenericSingleton;
     
-    def check(props: AbstractConfigGeneric): Boolean = true
-    def check(t: com.mcennis.dynamicfactory.Parameter[AnyRef]): Boolean = t.rule.check;
-    def get(): List[String] = List("default","defaultSettings","className")
-    def prototype(): AbstractConfigGeneric = this;
-    def quickCheck[Value](S: String)(implicit tag: reflect.runtime.universe.TypeTag[Value]): Boolean =  {
-      if((S == "default")&&(tag.equals(AbstractConfigGeneric.default.classType))){
-        return true;
-      }
-      if((S == "defaultSettings")&&(tag.equals(AbstractConfigGeneric.defaultSettings.classType))){
-        return true;
-      }
-//      if((S == "className")&&(tag.equals(AbstractConfigGeneric.className.classType))){
-//        return true;
-//      }
-      return false;
-    }
-    def getObject : AbstractConfigGeneric.type = AbstractConfigGeneric;
+    def merge[K](source:AbstractConfigGeneric)(implicit tag:TypeTag[K]): AbstractConfigGeneric;
+
+    def merge[K](implicit tag:TypeTag[K]): AbstractConfigGeneric;
+    
+    
 }
 
-object AbstractConfigGeneric {//extends AbstractConfigGenericSingleton{
-    var default:ParameterInternal[String] = new BasicParameter[String](
+abstract class AbstractConfigGenericSingleton {
+    var default:Parameter[String] = new BasicParameter[String](
         "Default", 
         List("BasicParameter"),
         "The default class type created in this factory",
         "When choosing between classes of a given interface, this variant is the default if no other is chosen",
         "As the master factory, this default object type is what is produced if there is no class in this factory matching the one provided, or if an object is created without specifying anything. The parameters needed to construct a reasonable deault of this type are programmed into the deault properties objet and mixed in with any supplied properties prior to construction. These properties are mutable and changeable.",
         PropertyRestriction.create[String].setMinCount[String](1).setMaxCount[String](1));
-        
-    var defaultSettings:ParameterInternal[AbstractConfigGeneric] = new BasicParameter[AbstractConfigGeneric](
-        "Default", 
-        List(new AbstractConfigGeneric),
-        "The default class type created in this factory",
-        "When choosing between classes of a given interface, this variant is the default if no other is chosen",
-        "As the master factory, this default object type is what is produced if there is no class in this factory matching the one provided, or if an object is created without specifying anything. The parameters needed to construct a reasonable deault of this type are programmed into the deault properties objet and mixed in with any supplied properties prior to construction. These properties are mutable and changeable.",
-        PropertyRestriction.create[AbstractConfigGeneric].setMinCount[AbstractConfigGeneric](0).setMaxCount[AbstractConfigGeneric](Int.MaxValue));
-  
-    var availableClasses:ParameterInternal[AbstractConfigGeneric] = new BasicParameter[AbstractConfigGeneric](
+    
+    var availableClasses:Parameter[AbstractConfigGeneric] = new BasicParameter[AbstractConfigGeneric](
         "availableClasses",
-        List(new AbstractConfigGeneric),
+        List(),
         "The default class type created in this factory",
         "When choosing between classes of a given interface, this variant is the default if no other is chosen",
         "As the master factory, this default object type is what is produced if there is no class in this factory matching the one provided, or if an object is created without specifying anything. The parameters needed to construct a reasonable deault of this type are programmed into the deault properties objet and mixed in with any supplied properties prior to construction. These properties are mutable and changeable.",
         PropertyRestriction.create[AbstractConfigGeneric].setMinCount[AbstractConfigGeneric](1).setMaxCount[AbstractConfigGeneric](Int.MaxValue) );
+    var defaultSettings:Parameter[AbstractConfigGeneric] = new BasicParameter[ConfigBasicParameter[String]](
+        "Default", 
+        null,
+        "The default class type created in this factory",
+        "When choosing between classes of a given interface, this variant is the default if no other is chosen",
+        "As the master factory, this default object type is what is produced if there is no class in this factory matching the one provided, or if an object is created without specifying anything. The parameters needed to construct a reasonable deault of this type are programmed into the deault properties objet and mixed in with any supplied properties prior to construction. These properties are mutable and changeable.",
+        null);
+  
+    var shortDescription:Parameter[String];
+    var description:Parameter[String];
+    var longDescription:Parameter[String];
+    
+    def getObject : Object;
+}
 
+object AbstractConfigGeneric extends AbstractConfigGenericSingleton{
+  shortDescription =  new BasicParameter[String](
+        "ShortDescription", 
+        List("Default"),
+        "A short description suitable for a tooltip",
+        "Provides a relatively short - under one sentence - designed to b displayed in a hover tooltip or other extremely short display space.",
+        "As part of 'documentation is code', this parameter provides code-queryable human documentation of this object so external tools can present documentation on unknown new modules without customizing these kits for these modules. This extends Model-View-Contrroller including all documentation of a class or interface into a syntax for querying the object itself. This is the shortest version, designed for quick, terse display of relatively small amounts of data about this object.",
+        PropertyRestriction.create[String].setMinCount[String](1).setMaxCount[String](1)   );
+
+  description = new BasicParameter[String](
+        "Description", 
+        List("Default"),
+        "A description suitable for a dialog box",
+        "Provides a consise description of this object - designed to be displayed in a single dialog box with moderate space constraints.",
+        "As part of 'documentation is code', this parameter provides code-queryable human documentation of this object so external tools can present documentation on unknown new modules without customizing these kits for these modules. This extends Model-View-Contrroller including all documentation of a class or interface into a syntax for querying the object itself. This is the mid-length version, designed for on-the-fly display of relatively complete data about this object.",
+        PropertyRestriction.create[String].setMinCount[String](1).setMaxCount[String](1)   );
   
+  longDescription = new BasicParameter[String](
+        "LongDescription", 
+        List("Default"),
+        "A long description suitable for a helpfile entry",
+        "Provides a lengthy, in-depth description of the object suitable for a book or extensive help file system.",
+        "As part of 'documentation is code', this parameter provides code-queryable human documentation of this object so external tools can present documentation on unknown new modules without customizing these kits for these modules. This extends Model-View-Contrroller including all documentation of a class or interface into a syntax for querying the object itself. This is the extended version, designed to provide every possible detail in extended and verbose documentation.",
+        PropertyRestriction.create[String].setMinCount[String](1).setMaxCount[String](1)   );
   
+  def getObject() : Object= this;
 }
 

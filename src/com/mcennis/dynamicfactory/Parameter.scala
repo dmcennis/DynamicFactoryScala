@@ -4,15 +4,21 @@ import scala.reflect.runtime.universe._
 import scala.collection.immutable.Map
 import scala.collection.immutable.List
 
-abstract class Parameter[T](val key : String, val data : List[T])(implicit tag : TypeTag[T]) {//extends AbstractConfigGeneric with  Ordered[Parameter[T]] {
+abstract class Parameter[+T](val key : String, val data : List[T])(implicit tag : TypeTag[T]) {//extends AbstractConfigGeneric with  Ordered[Parameter[T]] {
   val classType : String = tag.getClass.getPackage+"."+tag.getClass.getName;
   val shortDescription : String = "Tooltip content goes here";
   val longDescription : String = "Something suitable for a dialog box";
   val description : String = "Larger document for the extended help topic (a complete web page?)";
   val rule : SyntaxChecker[T] = SyntaxChecker.create[T];
   
-  def prototype(key:String, data:List[T]):Parameter[T];
-  def prototype(key:String,data:List[T],sd : String, d:String, ld:String,r:SyntaxChecker[T]):Parameter[T];
+  def prototype[K](k:String, d:List[K])(implicit tag:TypeTag[K]):Parameter[K];
+  def prototype[K](k:String,d:List[K],sd : String, de:String, ld:String,r:SyntaxChecker[K])(implicit tag:TypeTag[K]):Parameter[K];
+    def setKey(k:String):Parameter[T];
+  def setShortDescription(sd:String):Parameter[T];
+  def setDescription(d:String):Parameter[T];
+  def setLongDescription(ld:String):Parameter[T];
+  def setRule (r:SyntaxChecker[T]):Parameter[T];
+
 };
 
 class ParameterConfig {
