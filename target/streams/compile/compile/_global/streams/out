@@ -1,0 +1,17 @@
+[0m[[0m[33mwarn[0m] [0m[0mD:\git\DynamicFactoryScala\src\main\scala\com\mcennis\dynamicfactory\BasicParameter.scala:96:15: abstract type K in type pattern com.mcennis.dynamicfactory.ConfigBasicParameter[K] is unchecked since it is eliminated by erasure[0m
+[0m[[0m[33mwarn[0m] [0m[0m      case x: ConfigBasicParameter[K] => this.merge[K](x);[0m
+[0m[[0m[33mwarn[0m] [0m[0m              ^[0m
+[0m[[0m[33mwarn[0m] [0m[0mD:\git\DynamicFactoryScala\src\main\scala\com\mcennis\dynamicfactory\BasicParameter.scala:124:19: abstract type K in type pattern com.mcennis.dynamicfactory.ConfigBasicParameter[K] is unchecked since it is eliminated by erasure[0m
+[0m[[0m[33mwarn[0m] [0m[0m          case x: ConfigBasicParameter[K] => if (x.data != null) {[0m
+[0m[[0m[33mwarn[0m] [0m[0m                  ^[0m
+[0m[[0m[33mwarn[0m] [0m[0mD:\git\DynamicFactoryScala\src\main\scala\com\mcennis\dynamicfactory\BasicParameter.scala:131:17: fruitless type test: a value of type com.mcennis.dynamicfactory.Parameter[T] cannot also be a com.mcennis.dynamicfactory.ConfigBasicParameter[K][0m
+[0m[[0m[33mwarn[0m] [0m[0m        case x: ConfigBasicParameter[K] => if (x.data != null) {[0m
+[0m[[0m[33mwarn[0m] [0m[0m                ^[0m
+[0m[[0m[33mwarn[0m] [0m[0mD:\git\DynamicFactoryScala\src\main\scala\com\mcennis\dynamicfactory\BasicParameter.scala:133:21: abstract type K in type pattern com.mcennis.dynamicfactory.ConfigBasicParameter[K] is unchecked since it is eliminated by erasure[0m
+[0m[[0m[33mwarn[0m] [0m[0m            case y: ConfigBasicParameter[K] => if (y.data != null) {[0m
+[0m[[0m[33mwarn[0m] [0m[0m                    ^[0m
+[0m[[0m[33mwarn[0m] [0m[0m1 deprecation (since 2.11.0)[0m
+[0m[[0m[33mwarn[0m] [0m[0m1 deprecation (since 2.13.0)[0m
+[0m[[0m[33mwarn[0m] [0m[0m2 deprecations (since 2.13.2)[0m
+[0m[[0m[33mwarn[0m] [0m[0m4 deprecations in total; re-run with -deprecation for details[0m
+[0m[[0m[33mwarn[0m] [0m[0m8 warnings found[0m

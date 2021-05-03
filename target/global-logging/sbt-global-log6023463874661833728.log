@@ -1,0 +1,25 @@
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(compile, Some(3f96ebce-e52c-408f-a794-8e6c55a895d5), Some(CommandSource(console0)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mEvaluating tasks: Compile / compile[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning task... Cancel: Signal, check cycles: false, forcegc: true[0m
+[0m[[0m[0minfo[0m] [0m[0mcompiling 9 Scala sources and 2 Java sources to D:\git\DynamicFactoryScala\target\scala-2.13\classes ...[0m
+[0m[[0m[33mwarn[0m] [0m[0mD:\git\DynamicFactoryScala\src\main\scala\com\mcennis\dynamicfactory\BasicParameter.scala:96:15: abstract type K in type pattern com.mcennis.dynamicfactory.ConfigBasicParameter[K] is unchecked since it is eliminated by erasure[0m
+[0m[[0m[33mwarn[0m] [0m[0m      case x: ConfigBasicParameter[K] => this.merge[K](x);[0m
+[0m[[0m[33mwarn[0m] [0m[0m              ^[0m
+[0m[[0m[33mwarn[0m] [0m[0mD:\git\DynamicFactoryScala\src\main\scala\com\mcennis\dynamicfactory\BasicParameter.scala:124:19: abstract type K in type pattern com.mcennis.dynamicfactory.ConfigBasicParameter[K] is unchecked since it is eliminated by erasure[0m
+[0m[[0m[33mwarn[0m] [0m[0m          case x: ConfigBasicParameter[K] => if (x.data != null) {[0m
+[0m[[0m[33mwarn[0m] [0m[0m                  ^[0m
+[0m[[0m[33mwarn[0m] [0m[0mD:\git\DynamicFactoryScala\src\main\scala\com\mcennis\dynamicfactory\BasicParameter.scala:131:17: fruitless type test: a value of type com.mcennis.dynamicfactory.Parameter[T] cannot also be a com.mcennis.dynamicfactory.ConfigBasicParameter[K][0m
+[0m[[0m[33mwarn[0m] [0m[0m        case x: ConfigBasicParameter[K] => if (x.data != null) {[0m
+[0m[[0m[33mwarn[0m] [0m[0m                ^[0m
+[0m[[0m[33mwarn[0m] [0m[0mD:\git\DynamicFactoryScala\src\main\scala\com\mcennis\dynamicfactory\BasicParameter.scala:133:21: abstract type K in type pattern com.mcennis.dynamicfactory.ConfigBasicParameter[K] is unchecked since it is eliminated by erasure[0m
+[0m[[0m[33mwarn[0m] [0m[0m            case y: ConfigBasicParameter[K] => if (y.data != null) {[0m
+[0m[[0m[33mwarn[0m] [0m[0m                    ^[0m
+[0m[[0m[31merror[0m] [0m[0mD:\git\DynamicFactoryScala\src\main\scala\com\mcennis\dynamicfactory\PropertyRestriction.scala:10:8: object creation impossible. Missing implementation for:[0m
+[0m[[0m[31merror[0m] [0m[0m  def check[T](obj: com.mcennis.dynamicfactory.SyntaxChecker[T], property: com.mcennis.dynamicfactory.Property[T]): Boolean // inherited from trait SyntaxCheckerTrait[0m
+[0m[[0m[31merror[0m] [0m[0mobject PropertyRestriction extends SyntaxCheckerTrait{ //extends factory[PropertyRestriction[AnyRef]]{[0m
+[0m[[0m[31merror[0m] [0m[0m       ^[0m
+[0m[[0m[33mwarn[0m] [0m[0mfour warnings found[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m
+[0m[[0m[31merror[0m] [0m[0m(Compile / [31mcompileIncremental[0m) Compilation failed[0m
+[0m[[0m[31merror[0m] [0m[0mTotal time: 1 s, completed May 2, 2021 8:13:49 PM[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(shell, None, None)[0m

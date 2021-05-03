@@ -1,0 +1,23 @@
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(compile, Some(3b2a26e6-235e-4771-86c4-ec71e6368430), Some(CommandSource(console0)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mEvaluating tasks: Compile / compile[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning task... Cancel: Signal, check cycles: false, forcegc: true[0m
+[0m[[0m[0minfo[0m] [0m[0mcompiling 9 Scala sources and 2 Java sources to D:\git\DynamicFactoryScala\target\scala-2.13\classes ...[0m
+[0m[[0m[33mwarn[0m] [0m[0mD:\git\DynamicFactoryScala\src\main\scala\com\mcennis\dynamicfactory\BasicParameter.scala:96:15: abstract type K in type pattern com.mcennis.dynamicfactory.ConfigBasicParameter[K] is unchecked since it is eliminated by erasure[0m
+[0m[[0m[33mwarn[0m] [0m[0m      case x: ConfigBasicParameter[K] => this.merge[K](x);[0m
+[0m[[0m[33mwarn[0m] [0m[0m              ^[0m
+[0m[[0m[33mwarn[0m] [0m[0mD:\git\DynamicFactoryScala\src\main\scala\com\mcennis\dynamicfactory\BasicParameter.scala:124:19: abstract type K in type pattern com.mcennis.dynamicfactory.ConfigBasicParameter[K] is unchecked since it is eliminated by erasure[0m
+[0m[[0m[33mwarn[0m] [0m[0m          case x: ConfigBasicParameter[K] => if (x.data != null) {[0m
+[0m[[0m[33mwarn[0m] [0m[0m                  ^[0m
+[0m[[0m[33mwarn[0m] [0m[0mD:\git\DynamicFactoryScala\src\main\scala\com\mcennis\dynamicfactory\BasicParameter.scala:131:17: fruitless type test: a value of type com.mcennis.dynamicfactory.Parameter[T] cannot also be a com.mcennis.dynamicfactory.ConfigBasicParameter[K][0m
+[0m[[0m[33mwarn[0m] [0m[0m        case x: ConfigBasicParameter[K] => if (x.data != null) {[0m
+[0m[[0m[33mwarn[0m] [0m[0m                ^[0m
+[0m[[0m[33mwarn[0m] [0m[0mD:\git\DynamicFactoryScala\src\main\scala\com\mcennis\dynamicfactory\BasicParameter.scala:133:21: abstract type K in type pattern com.mcennis.dynamicfactory.ConfigBasicParameter[K] is unchecked since it is eliminated by erasure[0m
+[0m[[0m[33mwarn[0m] [0m[0m            case y: ConfigBasicParameter[K] => if (y.data != null) {[0m
+[0m[[0m[33mwarn[0m] [0m[0m                    ^[0m
+[0m[[0m[33mwarn[0m] [0m[0m1 deprecation (since 2.11.0)[0m
+[0m[[0m[33mwarn[0m] [0m[0m1 deprecation (since 2.13.0)[0m
+[0m[[0m[33mwarn[0m] [0m[0m2 deprecations (since 2.13.2)[0m
+[0m[[0m[33mwarn[0m] [0m[0m4 deprecations in total; re-run with -deprecation for details[0m
+[0m[[0m[33mwarn[0m] [0m[0m8 warnings found[0m
+[0m[[0m[32msuccess[0m] [0m[0mTotal time: 9 s, completed May 2, 2021 8:15:10 PM[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(shell, None, None)[0m
